@@ -1,4 +1,5 @@
 import Node from "./nodeClass.js"
+import mergeSort from "../mergeSort/mergeSort.js";
 
 class Tree {
 
