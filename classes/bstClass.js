@@ -25,31 +25,26 @@ class Tree {
     }
 
 
-    insertRec(root, value) {
+    #insertRec(root, value) {
 
         if (!root) {
             
             return new Node(value)
         }
 
-        //If the value is less than the root/current node.... then recurse down the left path
-        //If the value is greater than the root/current node... then recurse down the right path
-
         if (value < root.data) {
-            root.left = this.insertRec(root.left, value)
+            root.left = this.#insertRec(root.left, value)
         }
         else if (value > root.data) {
-            root.right = this.insertRec(root.right, value)
+            root.right = this.#insertRec(root.right, value)
         }
-        console.log(root)
-
 
         return root
     }
 
     insert(value) {
 
-        this.root = this.insertRec(this.root, value)
+        this.root = this.#insertRec(this.root, value)
         return this.root
     }
 

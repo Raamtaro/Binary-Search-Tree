@@ -13,11 +13,11 @@ console.log("*******************POST CHANGE*******************")
 
 myTree.insert(17)
 myTree.insert(52)
-// myTree.insert(420)
-// myTree.insert(112)
-// myTree.insert(1)
-// myTree.insert(311)
-// myTree.insert(57)
+myTree.insert(420)
+myTree.insert(112)
+myTree.insert(1)
+myTree.insert(311)
+myTree.insert(57)
 
 prettyPrint(myTree.root)
 
