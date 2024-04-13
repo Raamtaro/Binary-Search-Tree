@@ -4,8 +4,8 @@ import mergeSort from "../mergeSort/mergeSort.js";
 class Tree {
 
     constructor(startingArray = []){
-        this.root = this.buildTree([...new Set(mergeSort(startingArray))])
 
+        this.root = this.buildTree([...new Set(mergeSort(startingArray))])
     }
 
     buildTree(sortedArray) {
@@ -24,7 +24,7 @@ class Tree {
         return root  
     }
 
-
+    //Inserting Values******* */
     #insertRec(root, value) {
 
         if (!root) {
@@ -33,9 +33,11 @@ class Tree {
         }
 
         if (value < root.data) {
+
             root.left = this.#insertRec(root.left, value)
         }
         else if (value > root.data) {
+
             root.right = this.#insertRec(root.right, value)
         }
 
@@ -47,10 +49,36 @@ class Tree {
         this.root = this.#insertRec(this.root, value)
         return this.root
     }
+    //*********************** */
 
+    //Deleting Values******** */
     delete(value) {
-
+        
+        this.root = this.#deleteRec(this.root, value)
+        return this.root
     }
+
+    #deleteRec(root, value) {
+
+        //Recursion
+        //Exit Condition(s)?:
+        //1. value = root.data (where root is the current node that we're recursing through)
+        //2. !root - this means that the the value we want to delete doesn't exist and so we can return
+
+        //Otherwise, kind of similar to the insertRec fn
+        //is the value < the root.data? If so, root.left = #deleteRec(root.left, value)
+        //likewise, root.right = #deleteRec(root.right, value)
+
+        //Once the values are equal - we've hit it
+        //Three cases:
+        //1. The node has no children
+        //2. The node has one children
+        //3. The node has both children
+        //---- Do the children have children?
+
+        //End up returning root
+    }
+    /************************ */
 }
 
 export default Tree
