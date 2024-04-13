@@ -2,8 +2,7 @@ import merge from "./merge.js";
 
 const mergeSort = (unsortedArray) => {
 
-    if (!unsortedArray) return "Cannot sort an empty array";
-    if (unsortedArray.length === 1) return unsortedArray;
+    if (unsortedArray.length <= 1) return unsortedArray;
 
     const midpoint = Math.floor(unsortedArray.length/2);
 
