@@ -114,10 +114,22 @@ class Tree {
         // return root
 
         return !root ? null : (value < root.data ? this.#findRec(root.left, value) : (value > root.data ? this.#findRec(root.right, value) : root)) //Hotshot version that is equivalent to the above commented code!
-
     }
     //********************** */
 
+    levelOrder(callback = (nodeData) => console.log(nodeData)) {
+
+        let results = [];
+        this.#levelOrderRec(this.root, node => {
+            results.push(node.data); // Adding node data to results
+            callback(node); // Additionally calling the user-provided callback, if any
+        });
+        return results;
+    }
+
+    #levelOrderRec(root, callback) {
+        if (!root) {return}
+    }
 }
 
 export default Tree
