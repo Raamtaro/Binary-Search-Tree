@@ -30,7 +30,9 @@ console.log("*******************POST CHANGE*******************")
 prettyPrint(myTree.root)
 
 console.log("*******************SUB TREE*******************")
-prettyPrint(myTree.find(`90`))
 
+let node = 90
+if (!myTree.find(node)) console.log(null)
+else prettyPrint(myTree.find(node))
 
 // console.log(mergeSort([]))

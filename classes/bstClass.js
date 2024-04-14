@@ -106,25 +106,14 @@ class Tree {
 
     #findRec(root, value) {
 
-        //Exit Condition - the root is null
-        if (!root) {return null}
+        // if (!root) {return null}
 
-        //If the script is running at this point, then the 'root' of the current (sub)tree contains something
+        // if (value < root.data) {return this.#findRec(root.left, value)}
+        // if (value > root.data) {return this.#findRec(root.right, value)}
 
-        //In this case, we'd need to check for - is the value < or > root.data?
-        if (value < root.data) {
-            root = this.#findRec(root.left, value) 
-            return root
-            
-        }
-        else if (value > root.data) {
+        // return root
 
-            //likewise, traverse the right side
-            root = this.#findRec(root.right, value) 
-            return root
-        }
-
-        return root
+        return !root ? null : (value < root.data ? this.#findRec(root.left, value) : (value > root.data ? this.#findRec(root.right, value) : root)) //Hotshot version that is equivalent to the above commented code!
 
     }
     //********************** */
