@@ -21,5 +21,11 @@ myTree.insert(57)
 
 prettyPrint(myTree.root)
 
+myTree.delete(90)
+
+console.log("*******************POST CHANGE*******************")
+
+prettyPrint(myTree.root)
+
 
 // console.log(mergeSort([]))

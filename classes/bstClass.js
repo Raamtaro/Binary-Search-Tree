@@ -62,21 +62,59 @@ class Tree {
 
         //Recursion
         //Exit Condition(s)?:
-        //1. value = root.data (where root is the current node that we're recursing through)
+        //1. value = root.data (where root is the current node that we're recursing through) --- ACTUALLY DON'T PUT THIS AS AN EXIT CONDITION
         //2. !root - this means that the the value we want to delete doesn't exist and so we can return
+
+        if (!root) {return root}
 
         //Otherwise, kind of similar to the insertRec fn
         //is the value < the root.data? If so, root.left = #deleteRec(root.left, value)
         //likewise, root.right = #deleteRec(root.right, value)
 
-        //Once the values are equal - we've hit it
+        if (value < root.data) { //Recur down the left if the value is less than the current node
+
+            root.left = this.#deleteRec(root.left, value)
+            return root
+        }
+
+        else if (value > root.data) {//Likewise for the right if the value is greater
+
+            root.right = this.#deleteRec(root.right, value)
+            return root
+        }
+
+        //At this point in the function, the recursive call has hit a point where root.data ==== value
+
+        
         //Three cases:
-        //1. The node has no children
-        //2. The node has one children
+        
+        //1 and 2. The node has just one child (or no children) - so at least one child is null
+
+        if (root.left === null || root.right === null) {return root.left === null ? root.right : root.left}
+        
         //3. The node has both children
         //---- Do the children have children?
+        let succParent = root;
+        let succ = root.right;
 
-        //End up returning root
+        while (succ.left !== null) {
+
+            succParent = succ
+            succ = succ.left //Traverse down the left in case there are still descendants on the left side
+        }
+
+        if (succParent !== root) {
+
+            succParent.left = succ.right
+        }
+        else {
+
+            succParent.right = succ.right
+        }
+
+        root.data = succ.data
+
+        return root //End up returning root
     }
     /************************ */
 }
