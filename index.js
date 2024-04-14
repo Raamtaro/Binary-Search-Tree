@@ -21,7 +21,7 @@ myTree.insert(57)
 
 prettyPrint(myTree.root)
 
-myTree.delete(90)
+myTree.delete(35)
 
 console.log("*******************POST CHANGE*******************")
 
