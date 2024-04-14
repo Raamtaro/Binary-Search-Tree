@@ -23,9 +23,14 @@ prettyPrint(myTree.root)
 
 myTree.delete(35)
 
+
+
 console.log("*******************POST CHANGE*******************")
 
 prettyPrint(myTree.root)
+
+console.log("*******************SUB TREE*******************")
+prettyPrint(myTree.find(`90`))
 
 
 // console.log(mergeSort([]))
