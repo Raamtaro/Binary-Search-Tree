@@ -113,23 +113,118 @@ class Tree {
 
         // return root
 
-        return !root ? null : (value < root.data ? this.#findRec(root.left, value) : (value > root.data ? this.#findRec(root.right, value) : root)) //Hotshot version that is equivalent to the above commented code!
+        return !root ? null : (value < root.data ? this.#findRec(root.left, value) : (value > root.data ? this.#findRec(root.right, value) : root)) //Equivalent to the above commented code
     }
     //********************** */
 
-    levelOrder(callback = (nodeData) => console.log(nodeData)) {
+    //*************LEVEL ORDER */
+    levelOrder(callback = (nodeData) => {}) {
 
-        let results = [];
-        this.#levelOrderRec(this.root, node => {
-            results.push(node.data); // Adding node data to results
-            callback(node); // Additionally calling the user-provided callback, if any
-        });
-        return results;
+        let results = []
+        this.#levelOrderIteration(this.root, node => {
+
+            results.push(node.data) 
+            callback(node) 
+        })
+
+        return results
     }
 
-    #levelOrderRec(root, callback) {
+    #levelOrderIteration(root, callback) {
+
         if (!root) {return}
+
+        const queue = [root]
+        while (queue.length > 0) {
+
+            let current = queue.shift() //grab the next in line
+            callback(current) //Process the next in line info - via the callback that is provided in the levelOrder fn
+
+            //Add the left child of the current node, along with the right child of the current node if they exist
+            if (current.left) queue.push(current.left)
+            if (current.right) queue.push(current.right)
+        }
+
+        return //not necessary, readability
     }
+    //**************************************/
+
+    //*************IN ORDER *************/
+    inOrder(callback = (nodeData) => {}) {
+
+        let results = []
+        this.#inOrderRec(this.root, node => {
+
+            results.push(node.data)
+            callback(node)
+        })
+
+        return results
+    }
+
+    #inOrderRec(root, callback) {
+
+        if (!root) {return}
+
+        this.#inOrderRec(root.left, callback)
+        callback(root)
+        this.#inOrderRec(root.right, callback)
+
+        return
+    }
+    //**************************************/
+
+    //*************PRE ORDER *************/
+    preOrder(callback = (nodeData) => {}){
+
+        let results = []
+        this.#preOrderRec(this.root, node => {
+
+            results.push(node.data)
+            callback(node)
+        })
+
+        return results
+    }
+
+    #preOrderRec(root, callback){
+
+        if (!root) {return}
+
+        callback(root)
+        this.#preOrderRec(root.left, callback)
+        this.#preOrderRec(root.right, callback)
+
+        return
+    }
+    //**************************************/
+
+    //*************POST ORDER *************/
+    postOrder(callback = (nodeData) => {}){
+
+        let results = []
+        this.#postOrderRec(this.root, node => {
+
+            results.push(node.data)
+            callback(node)
+        })
+
+        return results
+    }
+
+    #postOrderRec(root, callback){
+
+        if (!root) return
+
+        this.#postOrderRec(root.left, callback)
+        this.#postOrderRec(root.right, callback)
+        callback(root)
+
+        return
+    }
+    //**************************************/
+
+
 }
 
 export default Tree

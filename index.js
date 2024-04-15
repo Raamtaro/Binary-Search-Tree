@@ -35,4 +35,9 @@ let node = 90
 if (!myTree.find(node)) console.log(null)
 else prettyPrint(myTree.find(node))
 
+console.log(myTree.levelOrder())
+console.log(myTree.inOrder())
+console.log(myTree.preOrder())
+console.log(myTree.postOrder())
+
 // console.log(mergeSort([]))
