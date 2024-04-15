@@ -21,23 +21,29 @@ myTree.insert(57)
 
 prettyPrint(myTree.root)
 
-myTree.delete(35)
+// myTree.delete(35)
 
 
 
-console.log("*******************POST CHANGE*******************")
+// console.log("*******************POST CHANGE*******************")
 
-prettyPrint(myTree.root)
+// prettyPrint(myTree.root)
 
-console.log("*******************SUB TREE*******************")
+// console.log("*******************SUB TREE*******************")
 
-let node = 90
-if (!myTree.find(node)) console.log(null)
-else prettyPrint(myTree.find(node))
+// let node = 90
+// if (!myTree.find(node)) console.log(null)
+// else prettyPrint(myTree.find(node))
 
 console.log(myTree.levelOrder())
 console.log(myTree.inOrder())
 console.log(myTree.preOrder())
 console.log(myTree.postOrder())
+
+const newTree = new Tree(myTree.levelOrder())
+
+
+console.log("*******************NEW TREE*******************")
+prettyPrint(myTree.reBalance())
 
 // console.log(mergeSort([]))

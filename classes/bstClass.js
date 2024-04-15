@@ -224,6 +224,27 @@ class Tree {
     }
     //**************************************/
 
+    //Find the height of a given node ********/
+    height(node) {
+        //height of a given node is the number of edges from the given node to the nearest leaf node
+
+    }
+
+    depth(node) {
+        //depth of the given node - distance between the node and the root
+    }
+
+    isBalanced() {
+
+
+    }
+
+    reBalance() {
+
+        if (!this.isBalanced) this.root = this.buildTree(this.levelOrder())
+        return this.root
+    }
+
 
 }
 
