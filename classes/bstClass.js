@@ -227,21 +227,67 @@ class Tree {
     //Find the height of a given node ********/
     height(node) {
         //height of a given node is the number of edges from the given node to the nearest leaf node
+        let heightLeft = 0;
+        let heightRight = 0;
 
+        const parent = this.find(node) //Find the subTree, which becomes the new root
+        const leftChild = parent.left
+        const rightChild = parent.right
+
+        if (!parent) return -1 
+
+        if (leftChild) heightLeft = (this.height(leftChild.data) + 1)
+        if (rightChild) heightRight = (this.height(rightChild.data) + 1)
+
+        
+        return heightRight > heightLeft ? heightRight : heightLeft
     }
 
     depth(node) {
         //depth of the given node - distance between the node and the root
+        return this.#depthRec(this.root, node)
+    }
+
+    #depthRec(root, value) {
+
+        let depth = 0
+        const node = this.find(value)
+
+        if (!node) return `Node with data: ${value} does not exist`
+
+        if (root === node) {
+            return 0
+        }
+
+        if (value < root.data) {
+            //Traverse down the left
+            depth = this.#depthRec(root.left, value) + 1
+        }
+
+        if (value > root.data) {
+            //traverse down the right
+            depth = this.#depthRec(root.right, value) + 1
+        }
+
+        return depth
+
+
     }
 
     isBalanced() {
 
+        const root = this.root
+        const leftSubTree = root.left
+        const rightSubTree = root.right
 
+        const delta = Math.abs(this.height(leftSubTree.data) - this.height(rightSubTree.data))
+
+        return delta > 1 ? false : true
     }
 
     reBalance() {
 
-        if (!this.isBalanced) this.root = this.buildTree(this.levelOrder())
+        if (!this.isBalanced()) this.root = this.buildTree(this.inOrder())
         return this.root
     }
 
