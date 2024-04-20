@@ -1,14 +1,21 @@
 import Node from "./nodeClass.js"
 import mergeSort from "../mergeSort/mergeSort.js";
-
+/**
+ * THIS CODE IS REFACTORED IN THIS BRANCH TO FOLLOW AN IMMUTABILITY PATTERN.
+ * 
+ * This means that a new Tree() object will be returned instead of modifications to this.root
+ */
 class Tree {
 
-    constructor(startingArray = []){
+    constructor(input = null){
 
-        this.root = this.buildTree([...new Set(mergeSort(startingArray))])
+        // this.root = Tree.buildTree([...new Set(mergeSort(startingArray))])
+        //If the input is an array, then sort it and build a new Tree
+        //Else, this.root = input
+        this.root = Array.isArray(input) ? Tree.buildTree([...new Set(mergeSort(input))]) : input
     }
 
-    buildTree(sortedArray) {
+    static buildTree(sortedArray) {
 
         const startIndex = 0
         const endIndex = sortedArray.length - 1
@@ -18,8 +25,8 @@ class Tree {
         const mid = Math.floor(sortedArray.length/2)
         const root = new Node(sortedArray[mid])
         
-        root.left = this.buildTree(sortedArray.slice(0, mid))
-        root.right = this.buildTree(sortedArray.slice(mid+1, sortedArray.length))
+        root.left = Tree.buildTree(sortedArray.slice(0, mid))
+        root.right = Tree.buildTree(sortedArray.slice(mid+1, sortedArray.length))
 
         return root  
     }
@@ -34,11 +41,15 @@ class Tree {
 
         if (value < root.data) {
 
-            root.left = this.#insertRec(root.left, value)
+            // root.left = this.#insertRec(root.left, value)
+            //accounting for immutability:
+            return new Node(root.data, this.#insertRec(root.left, value), root.right)
         }
         else if (value > root.data) {
 
-            root.right = this.#insertRec(root.right, value)
+            // root.right = this.#insertRec(root.right, value)
+            //accounting for immutability
+            return new Node(root.data, root.left, this.#insertRec(root.right, value))
         }
 
         return root
@@ -46,16 +57,18 @@ class Tree {
 
     insert(value) {
 
-        this.root = this.#insertRec(this.root, value)
-        return this.root
+        // this.root = this.#insertRec(this.root, value)
+        let immutableRoot = this.#insertRec(this.root, value) //replacing above line with this one (and similarly for all other helper fns) to follow immutable pattern
+        return new Tree(immutableRoot)
     }
     //*********************** */
 
     //Deleting Values******** */
     delete(value) {
         
-        this.root = this.#deleteRec(this.root, value)
-        return this.root
+        // this.root = this.#deleteRec(this.root, value)
+        let immutableRoot = this.#deleteRec(this.root, value)
+        return new Tree(immutableRoot)
     }
 
     #deleteRec(root, value) {
@@ -64,39 +77,30 @@ class Tree {
 
         if (value < root.data) { 
 
-            root.left = this.#deleteRec(root.left, value)
-            return root
+            // root.left = this.#deleteRec(root.left, value)
+            // return root
+            //Accounting for immutability and recurring left
+            return new Node(root.data, this.#deleteRec(root.left, value), root.right)
         }
 
         else if (value > root.data) {
 
-            root.right = this.#deleteRec(root.right, value)
-            return root
+            // root.right = this.#deleteRec(root.right, value)
+            // return root
+            //Account for immutability and recurring right
+            return new Node(root.data, root.left, this.#deleteRec(root.right, value))
         }
 
         if (root.left === null || root.right === null) {return root.left === null ? root.right : root.left}
         
-        let succParent = root;
+        // let succParent = root;
         let succ = root.right;
 
-        while (succ.left !== null) {
-
-            succParent = succ
+        while (succ.left) {
             succ = succ.left 
         }
 
-        if (succParent !== root) {
-
-            succParent.left = succ.right
-        }
-        else {
-
-            succParent.right = succ.right
-        }
-
-        root.data = succ.data
-
-        return root 
+        return new Node(successor.data, root.left, this.#deleteRec(root.right, succ.data))
     }
     /************************ */
 
@@ -287,8 +291,13 @@ class Tree {
 
     reBalance() {
 
-        if (!this.isBalanced()) this.root = this.buildTree(this.inOrder())
-        return this.root
+        // if (!this.isBalanced()) this.root = Tree.buildTree(this.inOrder())
+        // return this.root
+
+        //immutable pattern:
+        // Is the tree unbalanced? if so, new Tree.buildTree(this.inOrder()) else, null
+
+        return !this.isBalanced() ? new Tree(this.inOrder()) : null
     }
 
 

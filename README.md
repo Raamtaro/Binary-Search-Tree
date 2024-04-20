@@ -1,49 +1,21 @@
 # Binary-Search-Tree
 
-Binary Search Tree TOP Capstone: https://www.theodinproject.com/lessons/javascript-binary-search-trees
+DO NOT MERGE THIS BRANCH!!!!!!!!!! PLEASE!
+
+This branch is made as an experiment. I'm updating the class methods to follow an immutability pattern to better work with React. DO NOT MERGE THIS BRANCH.
+
+Project Requirements:
+
+- Initially, I want there to be a button that the user clicks on to generate an array of N random numbers (from 6 to initial 25, and the user can only have a tree of up to 35 nodes. Can this performance be pushed?). User can also have the option to enter their own array - they can enter any size array and get a console output, but only arrays that follow the aforementioned requirements.
+
+- ***As a Bonus to the above, I want their to be an animation that adds the new nodes to the tree in the UI in the same order as they are added as the recursive stack resolves.
+
+- I want the user to be able to insert new nodes with integer values of their choosing, delete any node on the tree anywhere (and have the node rearrange appropriately via the implementation that I've already written)
+
+- I want the user to be able to reBalance the node (and the option only appears if the tree becomes unbalanced, which is a check that should be happening in the background)
+
+- I also want the user to be able to click on a node, and examine a particular subTree. The find(node) function returns the node and it's left, right, data parameters. This means that there needs to be a way to create a new Tree that is also unsorted. Need to refactor the class declaration.
 
 
-This project is a javascript implementation of a Binary Search Tree (BST) data structure. This was completed as part of my self study following The Odin Project syllabus, along the Full Stack Javascript path. BSTs are an ordered structure built from Nodes, starting from a Root Node.
+Tech Stack: JS, React, CSS
 
-A Node in a BST has the following properties:
-
-- data: the value of a node (an integer value in this implementation)
-
-- left: points to the left Node which contains a value less than its Root
-
-- right: points to the right Node which contains a value greater than its Root
-
-A Node is considered a Leaf Node if it has no children - i.e. if node.left == node.right == null
-
-
-This project consists of the following modules:
-
-Classes:
-
-- bstClass.js
-- nodeClass.js
-
-Merge Sort:
-
-- merge.js
-- mergeSort.js
-
-Misc:
-
-- prettyPrint.js
-
-Driver:
-
-- index.js
-
-
-**To run the project:**
-
-1. Clone this repository
-
-2. Make sure that node is installed on your machine. If it is not, follow this guide (jump to the section which fits your specs): https://www.theodinproject.com/lessons/foundations-installing-node-js
-
-3. Run `node index.js` in your terminal after navigating to the `Binary-Search-Tree` (parent) directory of this project.
-
-
-Feel free to submit issues if you see areas for improvement or any bugs.
