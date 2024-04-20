@@ -100,7 +100,7 @@ class Tree {
             succ = succ.left 
         }
 
-        return new Node(successor.data, root.left, this.#deleteRec(root.right, succ.data))
+        return new Node(succ.data, root.left, this.#deleteRec(root.right, succ.data))
     }
     /************************ */
 

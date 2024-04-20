@@ -17,9 +17,9 @@ let newTree = ogTree.insert(500)
 let newerTree = newTree.insert(502)
 let evenNewerTree = newerTree.insert(501)
 
-let theNewestTree = evenNewerTree.delete(500)
+let theLastTree = evenNewerTree.delete(evenNewerTree.root.data)
 
 prettyPrint(evenNewerTree.root)
-prettyPrint(theNewestTree.root)
+prettyPrint(theLastTree.root)
 
 prettyPrint(ogTree.root)
