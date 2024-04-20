@@ -5,7 +5,7 @@ import { randomArray, cryptoRandomArray, cryptoRandomAdditions } from "./misc/ra
 
 
 let ogTree = new Tree(cryptoRandomArray()) //A new Balanced Tree from a cryptoRandom 25 numbers
-let treeInsertions = cryptoRandomArray(4)
+// let treeInsertions = cryptoRandomArray(4)
 
 console.log(ogTree.levelOrder())
 
